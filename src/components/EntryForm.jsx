@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { saveEntry } from "../services/localStorageService";
 
-const EntryForm = () => {
+
+const EntryForm = ({ onSave }) => {
   const [formData, setFormData] = useState({
     date: "",
     topic: "",
@@ -19,9 +21,21 @@ const EntryForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+    const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
+
+    saveEntry(formData);
+
+    onSave(); // 🔥 trigger refresh
+
+    setFormData({
+      date: "",
+      topic: "",
+      project: "",
+      testing: "",
+      hours: "",
+      notes: "",
+    });
   };
 
   return (
