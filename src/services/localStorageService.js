@@ -10,3 +10,9 @@ export const saveEntry = (entry) => {
   const updated = [...existing, entry];
   localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
 };
+
+export const deleteEntry = (index) => {
+  const existing = getEntries();
+  const updated = existing.filter((_, i) => i !== index);
+  localStorage.setItem("daily_entries", JSON.stringify(updated));
+};
